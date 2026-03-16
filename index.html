@@ -621,22 +621,60 @@ window.addEventListener('scroll', () => {
 });
 
 // Form submit
-function submitForm() {
-  const required = ['firstName','lastName','email','rollNo','phone','interest','motivation'];
-  let valid = true;
-  required.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el.value.trim()) {
-      el.style.borderColor = '#ff4d6d';
-      el.style.background = 'rgba(255,77,109,0.05)';
-      valid = false;
-      setTimeout(() => { el.style.borderColor = ''; el.style.background = ''; }, 2500);
+<script>
+// Function to submit form to multiple Formspree endpoints
+async function submitForm() {
+    const required = ['firstName','lastName','email','rollNo','phone','interest','motivation'];
+    let valid = true;
+
+    // Validation
+    required.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+            el.style.borderColor = '#ff4d6d';
+            el.style.background = 'rgba(255,77,109,0.05)';
+            valid = false;
+            setTimeout(() => { el.style.borderColor = ''; el.style.background = ''; }, 2500);
+        }
+    });
+    if (!valid) return;
+
+    // Collect form data
+    const data = {
+        'First Name': document.getElementById('firstName').value,
+        'Last Name': document.getElementById('lastName').value,
+        'Email': document.getElementById('email').value,
+        'Roll Number': document.getElementById('rollNo').value,
+        'Phone': document.getElementById('phone').value,
+        'Interest': document.getElementById('interest').value,
+        'Motivation': document.getElementById('motivation').value,
+        'Experience': document.getElementById('experience').value
+    };
+
+    // List of Formspree endpoints
+    const endpoints = [
+        'https://formspree.io/f/mreyyzlk',   // first email
+        'https://formspree.io/f/mjgaabla'    // second email
+    ];
+
+    // Send to both endpoints
+    try {
+        await Promise.all(endpoints.map(url => 
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+        ));
+        // Show success message
+        document.getElementById('form-content').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+    } catch (err) {
+        alert('Something went wrong. Please try again.');
+        console.error(err);
     }
-  });
-  if (!valid) return;
-  document.getElementById('form-content').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
 }
+</script>
 </script>
 </body>
 </html>
