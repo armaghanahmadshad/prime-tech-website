@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Tech — MNS-UET</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+:root {
+  --bg:     #070b14;
+  --bg2:    #0d1220;
+  --bg3:    #111827;
+  --blue:   #1a6cf6;
+  --sky:    #4fa3ff;
+  --gold:   #c9a84c;
+  --green:  #4ade80;
+  --silver: #8ca0bc;
+  --mist:   #c8d6e8;
+  --white:  #f0f6ff;
+  --line:   rgba(255,255,255,0.07);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: 'DM Sans', system-ui, sans-serif; overflow-x: hidden; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 10px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 70px;
+  background: rgba(7,11,20,0.88);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo-box {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, #1a6cf6, #0a3d8f);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; color: #fff;
+  box-shadow: 0 4px 14px rgba(26,108,246,0.4);
+  position: relative; flex-shrink: 0;
+}
+.nav-logo-box::after {
+  content: ''; position: absolute; bottom: 5px; right: 5px;
+  width: 6px; height: 2px; background: var(--gold); border-radius: 2px;
+}
+.nav-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--white); letter-spacing: 0.05em; }
+.nav-brand span { color: var(--sky); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 0.82rem; color: var(--silver); letter-spacing: 0.06em; font-weight: 500; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--sky); }
+.nav-cta {
+  padding: 9px 22px;
+  background: linear-gradient(135deg, #1a6cf6, #0d4fd4);
+  color: #fff; border: none; border-radius: 7px;
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; box-shadow: 0 4px 16px rgba(26,108,246,0.35);
+  transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,108,246,0.45); }
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 60px 80px; position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.hero-glow { position: absolute; border-radius: 50%; pointer-events: none; }
+.hero-glow-1 { top: -120px; right: -80px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(26,108,246,0.18) 0%, transparent 65%); }
+.hero-glow-2 { bottom: -100px; left: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 65%); }
+.hero-content { position: relative; z-index: 2; max-width: 720px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.28);
+  border-radius: 4px; padding: 6px 14px;
+  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 24px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-badge::before { content: '●'; font-size: 0.45rem; }
+.hero-h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800;
+  line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 22px;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+.hero-h1 em { font-style: normal; color: var(--sky); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--silver); line-height: 1.7; font-weight: 300;
+  max-width: 560px; margin-bottom: 40px;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+.hero-btns { display: flex; gap: 14px; animation: fadeUp 0.6s ease 0.3s both; flex-wrap: wrap; }
+.btn-primary {
+  padding: 14px 32px; background: linear-gradient(135deg, #1a6cf6, #0d4fd4);
+  color: #fff; border: none; border-radius: 9px;
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.8rem;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+  box-shadow: 0 6px 24px rgba(26,108,246,0.4); transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(26,108,246,0.5); }
+.btn-outline {
+  padding: 14px 32px; background: transparent; color: var(--mist);
+  border: 1px solid rgba(255,255,255,0.14); border-radius: 9px;
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.8rem;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+  transition: border-color 0.2s, color 0.2s; text-decoration: none; display: inline-block;
+}
+.btn-outline:hover { border-color: var(--sky); color: var(--sky); }
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 60px;
+  animation: fadeUp 0.6s ease 0.4s both;
+  padding-top: 40px; border-top: 1px solid var(--line); flex-wrap: wrap;
+}
+.hstat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--white); line-height: 1; }
+.hstat-num sup { font-size: 1rem; color: var(--sky); }
+.hstat-lbl { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver); margin-top: 4px; }
+
+/* SECTIONS */
+section { padding: 100px 60px; }
+.section-eyebrow { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sky); font-weight: 700; margin-bottom: 12px; display: block; }
+.section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+.section-title em { font-style: normal; color: var(--sky); }
+.section-body { font-size: 0.95rem; color: var(--silver); line-height: 1.7; font-weight: 300; max-width: 540px; }
+.section-divider { height: 1px; background: linear-gradient(90deg, var(--blue), rgba(255,255,255,0.03), transparent); margin-bottom: 60px; opacity: 0.4; }
+
+/* ABOUT */
+#about { background: var(--bg2); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-card-main {
+  background: var(--bg3); border: 1px solid var(--line);
+  border-radius: 20px; padding: 36px; position: relative; overflow: hidden;
+}
+.about-card-main::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--sky));
+}
+.about-uni-badge {
+  display: inline-block; background: rgba(26,108,246,0.12);
+  border: 1px solid rgba(26,108,246,0.25); border-radius: 6px; padding: 6px 14px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--sky); margin-bottom: 20px;
+}
+.about-card-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+.about-card-body { font-size: 0.82rem; color: var(--silver); line-height: 1.65; }
+.about-float {
+  position: absolute; bottom: -20px; right: -20px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+  border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 16px 20px; text-align: center;
+}
+.about-float-num { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--gold); }
+.about-float-lbl { font-size: 0.62rem; color: var(--silver); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* WHAT WE DO */
+#what { background: var(--bg); }
+.what-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 50px; }
+.what-card {
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 16px; padding: 32px; position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.what-card:hover { border-color: rgba(26,108,246,0.35); transform: translateY(-4px); }
+.what-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 16px 0 0 16px; }
+.wc-blue::before  { background: var(--blue); }
+.wc-sky::before   { background: var(--sky); }
+.wc-gold::before  { background: var(--gold); }
+.wc-green::before { background: var(--green); }
+.what-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 18px; }
+.wc-blue  .what-icon { background: rgba(26,108,246,0.15); }
+.wc-sky   .what-icon { background: rgba(79,163,255,0.15); }
+.wc-gold  .what-icon { background: rgba(201,168,76,0.15); }
+.wc-green .what-icon { background: rgba(74,222,128,0.12); }
+.what-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.what-desc { font-size: 0.83rem; color: var(--silver); line-height: 1.6; }
+
+/* TECH STACK */
+#tech { background: var(--bg2); }
+.tech-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+.tech-pills { display: flex; flex-wrap: wrap; gap: 12px; }
+.tech-pill { padding: 10px 20px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; cursor: default; transition: transform 0.2s; }
+.tech-pill:hover { transform: translateY(-3px); }
+.tp-blue  { background: rgba(26,108,246,0.12); color: var(--sky);   border: 1px solid rgba(26,108,246,0.3); }
+.tp-gold  { background: rgba(201,168,76,0.1);  color: var(--gold);  border: 1px solid rgba(201,168,76,0.3); }
+.tp-green { background: rgba(74,222,128,0.08); color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
+.tp-mist  { background: rgba(139,160,188,0.1); color: var(--mist);  border: 1px solid rgba(139,160,188,0.25); }
+
+/* TEAM */
+#team { background: var(--bg); }
+.team-grid { display: flex; gap: 24px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+.team-card {
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 16px; padding: 36px 30px; text-align: center; width: 270px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.team-card:hover { border-color: rgba(26,108,246,0.35); transform: translateY(-5px); }
+.team-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(26,108,246,0.5), transparent); }
+.team-avatar {
+  width: 76px; height: 76px; border-radius: 50%;
+  margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff;
+}
+.av-blue { background: linear-gradient(135deg, #1a6cf6, #0a3d8f); box-shadow: 0 8px 28px rgba(26,108,246,0.38); }
+.av-gold { background: linear-gradient(135deg, #c9a84c, #7a601a); box-shadow: 0 8px 28px rgba(201,168,76,0.32); }
+.team-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+.team-role { font-size: 0.7rem; color: var(--sky); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+
+/* JOIN / APPLY FORM */
+#join { background: var(--bg2); }
+.join-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.join-left { }
+.join-eligibility {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.22);
+  border-radius: 6px; padding: 7px 16px;
+  font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 24px;
+}
+.join-eligibility::before { content: '✓'; font-weight: 900; }
+.join-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+.join-title em { font-style: normal; color: var(--sky); }
+.join-body { font-size: 0.92rem; color: var(--silver); line-height: 1.75; margin-bottom: 28px; }
+.join-perks { display: flex; flex-direction: column; gap: 10px; }
+.join-perk {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.83rem; color: var(--mist);
+}
+.join-perk::before {
+  content: '→'; color: var(--sky); font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+}
+
+/* FORM CARD */
+.form-card {
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: 20px; padding: 40px 36px;
+  position: relative; overflow: hidden;
+}
+.form-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--sky), var(--gold));
+}
+.form-title {
+  font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 800;
+  color: var(--white); margin-bottom: 6px;
+}
+.form-subtitle { font-size: 0.78rem; color: var(--silver); margin-bottom: 28px; }
+
+.form-group { margin-bottom: 18px; }
+.form-label {
+  display: block; font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--silver); margin-bottom: 8px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 13px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  border-radius: 9px; color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+  outline: none; transition: border-color 0.2s, background 0.2s;
+  appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--blue); background: rgba(26,108,246,0.05);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--silver); opacity: 0.6; }
+.form-select option { background: var(--bg3); color: var(--white); }
+.form-textarea { resize: vertical; min-height: 90px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-submit {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, #1a6cf6, #0d4fd4);
+  color: #fff; border: none; border-radius: 9px;
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; box-shadow: 0 6px 24px rgba(26,108,246,0.4);
+  transition: transform 0.2s, box-shadow 0.2s; margin-top: 8px;
+}
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(26,108,246,0.5); }
+
+/* SUCCESS MESSAGE */
+.form-success {
+  display: none; text-align: center; padding: 30px 20px;
+}
+.form-success-icon { font-size: 3rem; margin-bottom: 16px; }
+.form-success-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--green); margin-bottom: 8px; }
+.form-success-body { font-size: 0.83rem; color: var(--silver); line-height: 1.6; }
+
+/* FOOTER */
+footer {
+  background: var(--bg); border-top: 1px solid var(--line);
+  padding: 40px 60px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.footer-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--white); }
+.footer-sub { font-size: 0.66rem; color: var(--silver); margin-top: 2px; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 0.73rem; color: var(--silver); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
+.footer-links a:hover { color: var(--sky); }
+.footer-copy { font-size: 0.67rem; color: var(--silver); text-align: right; }
+.footer-copy strong { color: var(--sky); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  section { padding: 70px 24px; }
+  #hero { padding: 100px 24px 60px; }
+  .about-grid, .what-grid, .join-wrapper { grid-template-columns: 1fr; gap: 40px; }
+  .tech-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-copy { text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-stats { gap: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-box">PT</div>
+    <span class="nav-brand">PRIME <span>TECH</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#what">What We Do</a></li>
+    <li><a href="#tech">Tech Stack</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#join">Apply</a></li>
+  </ul>
+  <a href="#join" class="nav-cta">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">MNS-UET · IT FA 2025</div>
+    <h1 class="hero-h1">Where Students<br>Become <em>Engineers.</em></h1>
+    <p class="hero-sub">Prime Tech is MNS-UET's premier student technology community. We build real projects, learn cutting-edge technologies, and grow as engineers — together.</p>
+    <div class="hero-btns">
+      <a href="#join" class="btn-primary">Apply Now →</a>
+      <a href="#what" class="btn-outline">Explore More</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">50<sup>+</sup></div><div class="hstat-lbl">Members</div></div>
+      <div><div class="hstat-num">20<sup>+</sup></div><div class="hstat-lbl">Projects</div></div>
+      <div><div class="hstat-num">10<sup>+</sup></div><div class="hstat-lbl">Workshops</div></div>
+      <div><div class="hstat-num">∞</div><div class="hstat-lbl">Potential</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-divider"></div>
+  <div class="about-grid">
+    <div class="reveal">
+      <span class="section-eyebrow">Who We Are</span>
+      <h2 class="section-title">Built by Students,<br>for <em>Students.</em></h2>
+      <p class="section-body" style="margin-bottom:20px;">Prime Tech is the official student technology community of MNS-UET. We were founded with one mission: to give IT students hands-on experience with technologies that actually matter in the industry.</p>
+      <p class="section-body">Whether you are a beginner who just started coding or someone already building projects — Prime Tech is your place to grow, collaborate, and launch your career.</p>
+    </div>
+    <div class="reveal" style="transition-delay:0.15s; position:relative;">
+      <div class="about-card-main">
+        <div class="about-uni-badge">MNS-UET · Multan</div>
+        <div class="about-card-title">Prime Tech Community</div>
+        <p class="about-card-body">A community-driven team where IT students build real projects, develop practical skills, and grow together. Our members graduate with confidence, experience, and a strong portfolio.</p>
+        <br>
+        <p class="about-card-body" style="color:var(--sky); font-weight:500;">Open exclusively for IT FA 2025 Students</p>
+      </div>
+      <div class="about-float">
+        <div class="about-float-num">2025</div>
+        <div class="about-float-lbl">Founded</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section id="what">
+  <div class="section-divider"></div>
+  <div style="max-width:560px" class="reveal">
+    <span class="section-eyebrow">What We Do</span>
+    <h2 class="section-title">Learn. Build.<br><em>Innovate.</em></h2>
+    <p class="section-body">Everything we do is hands-on. No boring lectures — just real skills, real projects, and real growth alongside your peers.</p>
+  </div>
+  <div class="what-grid">
+    <div class="what-card wc-blue reveal" style="transition-delay:0.05s">
+      <div class="what-icon">☁️</div>
+      <div class="what-title">Microsoft Azure & Cloud</div>
+      <p class="what-desc">Get hands-on experience with Microsoft Azure — learn cloud deployments, storage, and enterprise-grade infrastructure used by top companies.</p>
+    </div>
+    <div class="what-card wc-sky reveal" style="transition-delay:0.1s">
+      <div class="what-icon">🌐</div>
+      <div class="what-title">Web Development</div>
+      <p class="what-desc">Build full-stack web projects from scratch using React, Node.js, and Next.js. Ship real projects you can proudly show in your portfolio.</p>
+    </div>
+    <div class="what-card wc-gold reveal" style="transition-delay:0.15s">
+      <div class="what-icon">🤖</div>
+      <div class="what-title">Artificial Intelligence</div>
+      <p class="what-desc">Work on AI and ML projects using Python and TensorFlow. Explore real datasets and build intelligent applications step by step.</p>
+    </div>
+    <div class="what-card wc-green reveal" style="transition-delay:0.2s">
+      <div class="what-icon">🎯</div>
+      <div class="what-title">Workshops & Hackathons</div>
+      <p class="what-desc">Compete in hackathons, attend expert-led workshops, and earn recognition that accelerates your skills and career faster than any classroom.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <div class="section-divider"></div>
+  <div class="tech-header reveal">
+    <div>
+      <span class="section-eyebrow">Tech Stack</span>
+      <h2 class="section-title">Technologies<br>We <em>Master.</em></h2>
+    </div>
+    <p class="section-body" style="max-width:300px; text-align:right;">Industry-relevant tools and frameworks used by top companies worldwide.</p>
+  </div>
+  <div class="tech-pills reveal" style="transition-delay:0.1s">
+    <span class="tech-pill tp-blue">React</span>
+    <span class="tech-pill tp-blue">Node.js</span>
+    <span class="tech-pill tp-blue">Microsoft Azure</span>
+    <span class="tech-pill tp-blue">Docker</span>
+    <span class="tech-pill tp-gold">Python</span>
+    <span class="tech-pill tp-gold">AI / ML</span>
+    <span class="tech-pill tp-gold">TensorFlow</span>
+    <span class="tech-pill tp-green">Next.js</span>
+    <span class="tech-pill tp-green">Firebase</span>
+    <span class="tech-pill tp-mist">Git & GitHub</span>
+    <span class="tech-pill tp-mist">Linux</span>
+    <span class="tech-pill tp-mist">VS Code</span>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-divider"></div>
+  <div style="text-align:center" class="reveal">
+    <span class="section-eyebrow">Leadership</span>
+    <h2 class="section-title">Meet the <em>Team.</em></h2>
+    <p class="section-body" style="margin:0 auto 50px;">The people who built Prime Tech from the ground up.</p>
+  </div>
+  <div class="team-grid">
+    <div class="team-card reveal" style="transition-delay:0.1s">
+      <div class="team-avatar av-blue">MM</div>
+      <div class="team-name">Muhammad Masab</div>
+      <div class="team-role">co-leader</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay:0.2s">
+      <div class="team-avatar av-gold">AMG</div>
+      <div class="team-name">Armaghan Ahmed Shad</div>
+      <div class="team-role">Team Leader</div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN / APPLY -->
+<section id="join">
+  <div class="section-divider"></div>
+  <div class="join-wrapper">
+
+    <!-- LEFT: info -->
+    <div class="reveal">
+      <div class="join-eligibility">IT FA 2025 Students Only</div>
+      <h2 class="join-title">Ready to<br><em>Join Us?</em></h2>
+      <p class="join-body">Fill out the application form and become part of Prime Tech — MNS-UET's most driven student tech community. No experience needed, just passion.</p>
+      <div class="join-perks">
+        <div class="join-perk">Learn Microsoft Azure & Cloud Computing</div>
+        <div class="join-perk">Build real projects for your portfolio</div>
+        <div class="join-perk">Master Web Development & AI</div>
+        <div class="join-perk">Participate in workshops & hackathons</div>
+        <div class="join-perk">Learn from and collaborate with peers</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="reveal" style="transition-delay:0.15s">
+      <div class="form-card">
+        <form action="https://formspree.io/f/mreyyzlk" method="POST">
+
+<div class="form-title">Application Form</div>
+<div class="form-subtitle">Prime Tech · MNS-UET · IT FA 2025</div>
+
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">First Name</label>
+<input class="form-input" type="text" name="First Name" placeholder="Muhammad" required>
+</div>
+
+<div class="form-group">
+<label class="form-label">Last Name</label>
+<input class="form-input" type="text" name="Last Name" placeholder="Ali" required>
+</div>
+</div>
+
+<div class="form-group">
+<label class="form-label">Student Email</label>
+<input class="form-input" type="email" name="Email" placeholder="yourname@mnsuet.edu.pk" required>
+</div>
+
+<div class="form-group">
+<label class="form-label">Roll Number</label>
+<input class="form-input" type="text" name="Roll Number" placeholder="FA25-IT-001" required>
+</div>
+
+<div class="form-group">
+<label class="form-label">Phone Number</label>
+<input class="form-input" type="tel" name="Phone Number" placeholder="+92 300 0000000" required>
+</div>
+
+<div class="form-group">
+<label class="form-label">Area of Interest</label>
+<select class="form-select" name="Interest" required>
+<option value="">Select your interest</option>
+<option>Microsoft Azure & Cloud</option>
+<option>Web Development</option>
+<option>Artificial Intelligence & ML</option>
+<option>Full Stack Development</option>
+<option>All of the above</option>
+</select>
+</div>
+
+<div class="form-group">
+<label class="form-label">Why do you want to join Prime Tech?</label>
+<textarea class="form-textarea" name="Motivation" placeholder="Tell us about yourself..." required></textarea>
+</div>
+
+<div class="form-group">
+<label class="form-label">Prior Experience</label>
+<select class="form-select" name="Experience">
+<option>No experience yet</option>
+<option>Beginner</option>
+<option>Intermediate</option>
+<option>Advanced</option>
+</select>
+</div>
+
+<button class="form-submit" type="submit">Submit Application →</button>
+
+</form>
+
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon">✅</div>
+          <div class="form-success-title">Application Submitted!</div>
+          <p class="form-success-body">Thank you for applying to Prime Tech. We'll review your application and get back to you on your provided email.<br><br><strong style="color:var(--sky);">Welcome to the community!</strong></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="nav-logo-box">PT</div>
+    <div>
+      <div class="footer-name">PRIME TECH</div>
+      <div class="footer-sub">MNS-UET · Student Tech Community</div>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#what">Programs</a>
+    <a href="#team">Team</a>
+    <a href="#join">Apply</a>
+  </div>
+  <div class="footer-copy">
+    <strong>primetech@mnsuet.edu.pk</strong><br>
+    © 2025 Prime Tech, MNS-UET
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(r => observer.observe(r));
+
+// Active nav
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
+
+// Form submit
+function submitForm() {
+  const required = ['firstName','lastName','email','rollNo','phone','interest','motivation'];
+  let valid = true;
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.style.borderColor = '#ff4d6d';
+      el.style.background = 'rgba(255,77,109,0.05)';
+      valid = false;
+      setTimeout(() => { el.style.borderColor = ''; el.style.background = ''; }, 2500);
+    }
+  });
+  if (!valid) return;
+  document.getElementById('form-content').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
